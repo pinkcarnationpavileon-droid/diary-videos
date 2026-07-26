@@ -166,10 +166,25 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
     }
 
-    /* Search Bar now aligned to Left */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    /* Search Bar following logo on the left */
     .search-bar {
       display: flex;
       align-items: center;
@@ -195,21 +210,6 @@
       font-size: 16px;
       cursor: pointer;
       color: var(--pink-dark);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .logo img {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
     }
 
     /* Layout Main Container */
