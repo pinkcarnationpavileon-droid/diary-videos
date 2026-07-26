@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>On the road for 10000000000k subz!</title>
+  <link rel="icon" type="image/jpeg" href="https://nicegirlslumber.neocities.org/newfavicon.png" alt="myface">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
 
+  <header>
+    <div class="logo" onclick="loadVideo(0)">
+      <img src="https://nicegirlslumber.neocities.org/newfavicon.png" alt="Logo">
+      <span>VloggerU</span>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search diary entries...">
+      <button>Search</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-view">
+      <div class="video-display-box">
+        <img id="main-thumb" src="" alt="Video Screen">
+      </div>
+
+      <div class="video-details">
+        <h1 class="video-title" id="main-title">Loading...</h1>
+        
+        <div class="channel-row">
+          <div class="channel-info">
+            <img class="channel-avatar" src="https://nicegirlslumber.neocities.org/newfavicon.png" alt="Milagro">
+            <div>
+              <div class="channel-name">Milagro</div>
+              <div class="sub-count">10,000,000,000 subs</div>
+            </div>
+          </div>
+          <button class="sub-btn">Subscribed!</button>
+        </div>
+
+        <div class="description-box">
+          <div class="diary-header">📖 Diary Log: <span id="main-date"></span></div>
+          <div id="main-entry">Select a video to read the entry.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-view">
+      <h3 class="sidebar-title">Recent Uploads</h3>
+      <div id="sidebar-list"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data for the 5 entries
+    const videoEntries = [
+      {
+        id: 0,
+        title: "Vlog #01: My First Day On VloggerU!",
+        thumb: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+        date: "October 12, 2026",
+        entry: "Dear Diary, I finally set up my VloggerU channel today!! I'm super excited but also a little nervous. Hopefully my laptop doesn't overheat while editing these clips..."
+      },
+      {
+        id: 1,
+        title: "Vlog #02: Late Night Coding & Snacks",
+        thumb: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+        date: "October 15, 2026",
+        entry: "Dear Diary, stay up till 3 AM fixing CSS animations... totally worth it! Drank way too much iced coffee though."
+      },
+      {
+        id: 2,
+        title: "Vlog #03: Room Tour & Pretty Aesthetics",
+        thumb: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+        date: "October 18, 2026",
+        entry: "Dear Diary, reorganized my whole desk setup today! Added pink fairy lights and new stickers. It feels so cozy now."
+      },
+      {
+        id: 3,
+        title: "Vlog #04: Rainy Day Outdoor Walk",
+        thumb: "https://images.unsplash.com/photo-1501999635878-71cb5379c2d4?auto=format&fit=crop&w=800&q=80",
+        date: "October 21, 2026",
+        entry: "Dear Diary, went outside for a bit during the storm. The air smelled so fresh! Shot some cute B-roll footage for the video."
+      },
+      {
+        id: 4,
+        title: "Vlog #05: Hit 10 Billion Subscribers?!",
+        thumb: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
+        date: "October 24, 2026",
+        entry: "Dear Diary, absolutely wild milestone day! Thank you everyone for sticking around. Celebration cake stream coming super soon!"
+      }
+    ];
+
+    // Build Sidebar
+    function renderSidebar() {
+      const listContainer = document.getElementById('sidebar-list');
+      listContainer.innerHTML = '';
+
+      videoEntries.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = `sidebar-card ${index === 0 ? 'active' : ''}`;
+        card.id = `card-${index}`;
+        card.onclick = () => loadVideo(index);
+
+        card.innerHTML = `
+          <img src="${item.thumb}" class="sidebar-thumb" alt="Thumbnail">
+          <div class="sidebar-info">
+            <div class="sidebar-card-title">${item.title}</div>
+            <div class="sidebar-meta">Milagro • ${item.date}</div>
+          </div>
+        `;
+        listContainer.appendChild(card);
+      });
+    }
+
+    // Dynamic Video Switch Function
+    function loadVideo(index) {
+      const selected = videoEntries[index];
+
+      // Update Main View Content
+      document.getElementById('main-thumb').src = selected.thumb;
+      document.getElementById('main-title').innerText = selected.title;
+      document.getElementById('main-date').innerText = selected.date;
+      document.getElementById('main-entry').innerText = selected.entry;
+
+      // Update Active Card Styling
+      document.querySelectorAll('.sidebar-card').forEach(c => c.classList.remove('active'));
+      const activeCard = document.getElementById(`card-${index}`);
+      if (activeCard) activeCard.classList.add('active');
+    }
+
+    // Initialize Page
+    window.onload = function() {
+      renderSidebar();
+      loadVideo(0);
+    };
+  </script>
+</body>
+</html>
