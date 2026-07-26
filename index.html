@@ -4,7 +4,6 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>On the road for 10000000000k subz!</title>
-  <link rel="stylesheet" href="style-2-1.css">
   <link rel="icon" type="image/jpeg" href="https://nicegirlslumber.neocities.org/newfavicon.png" alt="myface">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,14 +11,58 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo" onclick="loadVideo(0)">
-      <img src="https://nicegirlslumber.neocities.org/newfavicon.png" alt="Logo">
-      <span>VloggerU</span>
+  <div class="browser-frame">
+    <div class="browser-tabs">
+      <div class="tab active">
+        <span>VloggerU - Milagro</span>
+        <span class="tab-close">✕</span>
+      </div>
+      <div class="tab">
+        <span>WorkIT</span>
+        <span class="tab-close">✕</span>
+      </div>
+      <div class="tab">
+        <span>Neocities Admin</span>
+        <span class="tab-close">✕</span>
+      </div>
     </div>
-    <div class="search-bar">
-      <input type="text" placeholder="Search diary entries...">
-      <button>Search</button>
+
+    <div class="browser-toolbar">
+      <button class="nav-btn" title="Back (Disabled)">◀</button>
+      <button class="nav-btn" title="Forward (Disabled)">▶</button>
+      <button class="nav-btn" title="Refresh (Disabled)">↻</button>
+      
+      <div class="url-bar">
+        🔒 https://vloggeru.com/watch?v=milagro_diary_logs
+      </div>
+
+      <div class="bookmarks-container">
+        <button class="bookmark-btn" onclick="toggleBookmarks()">
+          ★ Bookmarks
+        </button>
+
+        <div id="bookmarks-menu" class="bookmarks-dropdown">
+          <div class="bookmark-item" onclick="loadVideo(0)">⭐ Vlog #01 - First Day</div>
+          <div class="bookmark-item" onclick="loadVideo(1)">⭐ Vlog #02 - Late Night</div>
+          <div class="bookmark-item" onclick="loadVideo(2)">⭐ Vlog #03 - Room Tour</div>
+          <div class="bookmark-item" onclick="loadVideo(3)">⭐ Vlog #04 - Rainy Walk</div>
+          <div class="bookmark-item" onclick="loadVideo(4)">⭐ Vlog #05 - Milestone</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-left">
+      <div class="search-bar">
+        <input type="text" placeholder="Search entries...">
+        <button>Search</button>
+      </div>
+
+      <div class="logo" onclick="loadVideo(0)">
+        <img src="https://nicegirlslumber.neocities.org/newfavicon.png" alt="Logo">
+        <span>VloggerU</span>
+      </div>
     </div>
   </header>
 
@@ -57,7 +100,6 @@
   </div>
 
   <script>
-    // Data for the 5 entries
     const videoEntries = [
       {
         id: 0,
@@ -71,7 +113,7 @@
         title: "Vlog #02: Late Night Coding & Snacks",
         thumb: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
         date: "October 15, 2026",
-        entry: "Dear Diary, stay up till 3 AM fixing CSS animations... totally worth it! Drank way too much iced coffee though."
+        entry: "Dear Diary, stayed up till 3 AM fixing CSS animations... totally worth it! Drank way too much iced coffee though."
       },
       {
         id: 2,
@@ -96,7 +138,6 @@
       }
     ];
 
-    // Build Sidebar
     function renderSidebar() {
       const listContainer = document.getElementById('sidebar-list');
       listContainer.innerHTML = '';
@@ -118,23 +159,27 @@
       });
     }
 
-    // Dynamic Video Switch Function
     function loadVideo(index) {
       const selected = videoEntries[index];
 
-      // Update Main View Content
       document.getElementById('main-thumb').src = selected.thumb;
       document.getElementById('main-title').innerText = selected.title;
       document.getElementById('main-date').innerText = selected.date;
       document.getElementById('main-entry').innerText = selected.entry;
 
-      // Update Active Card Styling
       document.querySelectorAll('.sidebar-card').forEach(c => c.classList.remove('active'));
       const activeCard = document.getElementById(`card-${index}`);
       if (activeCard) activeCard.classList.add('active');
+
+      // Close bookmarks menu if open
+      document.getElementById('bookmarks-menu').classList.remove('open');
     }
 
-    // Initialize Page
+    function toggleBookmarks() {
+      const menu = document.getElementById('bookmarks-menu');
+      menu.classList.toggle('open');
+    }
+
     window.onload = function() {
       renderSidebar();
       loadVideo(0);
